@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>7</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Lib.Harmony" Version="2.2.2" PrivateAssets="all" />
+      <PackageReference Include="SpaceEngineersDedicated.ReferenceAssemblies" Version="1.201.13" IncludeAssets="compile" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="obj\Debug\net48" />
+    </ItemGroup>
+
+</Project>
