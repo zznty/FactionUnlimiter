@@ -17,7 +17,7 @@ namespace FactionUnlimiter
                 if (instruction.opcode == OpCodes.Ldc_I4_3)
                 {
                     instruction.opcode = OpCodes.Ldc_I4;
-                    instruction.operand = 512;
+                    instruction.operand = 10;
                 }
                 
                 yield return instruction;
@@ -38,7 +38,7 @@ namespace FactionUnlimiter
                 if (instruction.opcode == OpCodes.Ldc_I4_3)
                 {
                     instruction.opcode = OpCodes.Ldc_I4;
-                    instruction.operand = 512;
+                    instruction.operand = 10;
                     ins[i + 1].opcode = OpCodes.Ble_S;
                 }
 
