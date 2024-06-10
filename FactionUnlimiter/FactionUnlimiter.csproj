@@ -3,15 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net48</TargetFramework>
         <LangVersion>7</LangVersion>
+        <RestoreAdditionalProjectSources>https://nuget.storage.yandexcloud.net/index.json</RestoreAdditionalProjectSources>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Lib.Harmony" Version="2.2.2" PrivateAssets="all" />
-      <PackageReference Include="SpaceEngineersDedicated.ReferenceAssemblies" Version="1.201.13" IncludeAssets="compile" PrivateAssets="all" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="obj\Debug\net48" />
+      <PackageReference Include="SpaceEngineersDedicated.ReferenceAssemblies" Version="1.*" ExcludeAssets="runtime" />
     </ItemGroup>
 
 </Project>
