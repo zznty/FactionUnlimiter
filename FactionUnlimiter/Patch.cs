@@ -1,49 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 using Sandbox.Game.Gui;
-using SpaceEngineers.Game.GUI;
 
 namespace FactionUnlimiter
 {
-    [HarmonyPatch(typeof(MyGuiScreenCreateOrEditFactionSpace), nameof(MyGuiScreenCreateOrEditFactionSpace.RecreateControls))]
+    [HarmonyPatch(typeof(MyGuiScreenCreateOrEditFaction), "OnOkClick")]
     public static class Patch
     {
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            foreach (var instruction in instructions)
-            {
-                if (instruction.opcode == OpCodes.Ldc_I4_3)
-                {
-                    instruction.opcode = OpCodes.Ldc_I4;
-                    instruction.operand = 10;
-                }
-                
-                yield return instruction;
-            }
-        }
-    }
-    
-    [HarmonyPatch(typeof(MyGuiScreenCreateOrEditFaction), "OnOkClick")]
-    public static class Patch2
-    {
-        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-        {
-            var ins = instructions.ToList();
-            for (var i = 0; i < ins.Count; i++)
-            {
-                var instruction = ins[i];
-                
-                if (instruction.opcode == OpCodes.Ldc_I4_3)
-                {
-                    instruction.opcode = OpCodes.Ldc_I4;
-                    instruction.operand = 10;
-                    ins[i + 1].opcode = OpCodes.Ble_S;
-                }
-
-                yield return instruction;
-            }
+            return new CodeMatcher(instructions)
+                .SearchForward(b => b.opcode == OpCodes.Ldc_I4_3)
+                .Advance(1)
+                .SetOpcodeAndAdvance(OpCodes.Ble_S)
+                .InstructionEnumeration();
         }
     }
 }
